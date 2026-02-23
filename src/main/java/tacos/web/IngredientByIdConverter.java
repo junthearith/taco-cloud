@@ -8,6 +8,7 @@ import tacos.Ingredient.Type;
 import java.util.HashMap;
 import java.util.Map;
 
+// to handle textual values(String) and convert to match with List<Ingredient> (Ingredient)
 @Component
 public class IngredientByIdConverter implements Converter<String, Ingredient> {
 

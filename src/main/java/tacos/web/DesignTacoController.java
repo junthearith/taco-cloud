@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.support.SessionStatus;
 import tacos.Ingredient;
 import tacos.Ingredient.Type;
 import tacos.Taco;
@@ -45,28 +46,31 @@ public class DesignTacoController {
         }
     }
 
+    // TacoOrder is hold the state for the order being build as user creates
     @ModelAttribute(name = "tacoOrder")
     public TacoOrder order() {
         return new TacoOrder();
     }
 
+    // Taco object is placed into the view rendered in response
     @ModelAttribute(name = "taco")
     public Taco taco() {
         return new Taco();
     }
 
     // handle GET request for /design
-    @GetMapping     // paired with @RequestMapping, when HTTP GET is received for /design Spring MVC will call showDesignForm() to handle the request
+    @GetMapping
     public String showDesignForm() {
         log.info("From design method.");
         return "design";    // return a String value of "design", which is the view that used to render the model to browser
     }
 
-    // handle POST requests for taco design submissions
+    // handle POST requests for taco design submissions (when submitted)
     @PostMapping
     public String processTaco(Taco taco, @ModelAttribute TacoOrder tacoOrder) {
         tacoOrder.addTaco(taco);
         log.info("Processing taco: {}", taco);
+
         return "redirect:/orders/current";
     }
 

@@ -33,6 +33,15 @@ public class Taco {
         this.ingredients = ingredients;
     }
 
+    // lists tacos
+    @Override
+    public String toString() {
+        return "Taco{" +
+                "name='" + name + '\'' +
+                ", ingredients=" + ingredients +
+                '}';
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
